@@ -1,0 +1,29 @@
+- id: dlp-scan-secrets-only
+  name: Spidercob DLP — secrets scan
+  description: Blocks commits containing API keys, credentials, and 40+ other secret patterns. Runs fully offline.
+  language: node
+  entry: spidercob-dlp
+  args: ['--secrets-only', '--fail-on=HIGH', '--quiet']
+  types: [text]
+  pass_filenames: true
+  require_serial: false
+
+- id: dlp-scan-full
+  name: Spidercob DLP — full PII + secrets scan
+  description: Scans for PII (SSN, CC numbers, emails, phone numbers) and secrets. Requires SPIDERCOB_TOKEN.
+  language: node
+  entry: spidercob-dlp
+  args: ['--fail-on=HIGH', '--quiet']
+  types: [text]
+  pass_filenames: true
+  require_serial: false
+
+- id: dlp-scan-critical-only
+  name: Spidercob DLP — critical only
+  description: Only blocks commits with CRITICAL severity findings (keys, passwords, tokens).
+  language: node
+  entry: spidercob-dlp
+  args: ['--secrets-only', '--fail-on=CRITICAL', '--quiet']
+  types: [text]
+  pass_filenames: true
+  require_serial: false
